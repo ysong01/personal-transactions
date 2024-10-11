@@ -28,4 +28,4 @@ pages:
     paths:
       - public
   only:
-    - master  # or main, depending on your default branch
+    - master  # Change to 'main' if your default branch is 'main'

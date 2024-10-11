@@ -10,8 +10,9 @@ function App() {
     store: '',
     amount: '',
   });
+  const [notification, setNotification] = useState('');
 
-  const API_URL = 'https://personalfinance-production.up.railway.app';
+  const API_URL = process.env.REACT_APP_API_URL || 'https://personalfinance-production.up.railway.app';
 
   useEffect(() => {
     fetchTransactions();
@@ -23,6 +24,7 @@ function App() {
       setTransactions(res.data);
     } catch (err) {
       console.error('Error fetching transactions:', err);
+      setNotification('Failed to fetch transactions.');
     }
   };
 
@@ -32,8 +34,10 @@ function App() {
       await axios.post(`${API_URL}/transactions`, formData);
       fetchTransactions();
       setFormData({ date: '', store: '', amount: '' });
+      setNotification('Transaction added successfully!');
     } catch (err) {
       console.error('Error adding transaction:', err);
+      setNotification('Failed to add transaction.');
     }
   };
 
@@ -41,8 +45,10 @@ function App() {
     try {
       await axios.delete(`${API_URL}/transactions/${id}`);
       fetchTransactions();
+      setNotification('Transaction deleted successfully!');
     } catch (err) {
       console.error('Error deleting transaction:', err);
+      setNotification('Failed to delete transaction.');
     }
   };
 
@@ -53,6 +59,7 @@ function App() {
   return (
     <div className="container">
       <h1>Financial Transactions</h1>
+      {notification && <div className="notification">{notification}</div>}
       <form onSubmit={addTransaction} className="transaction-form">
         <input
           type="date"
