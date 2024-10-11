@@ -1,14 +1,31 @@
-image: node:14
+image: node:16
+
+stages:
+  - build
+  - deploy
 
 cache:
   paths:
     - node_modules/
 
-pages:
+build_job:
+  stage: build
   script:
     - npm install
     - npm run build
-    - cp -r build/ public/
+  artifacts:
+    paths:
+      - build/
+    expire_in: 1 hour
+
+pages:
+  stage: deploy
+  script:
+    - mkdir .public
+    - cp -r build/* .public/
+    - mv .public public
   artifacts:
     paths:
       - public
+  only:
+    - master  # or main, depending on your default branch
