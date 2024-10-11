@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/personal-transactions/static/css/main.2c08da48.css",
+    "main.js": "/personal-transactions/static/js/main.508fa7ac.js",
+    "index.html": "/personal-transactions/index.html",
+    "main.2c08da48.css.map": "/personal-transactions/static/css/main.2c08da48.css.map",
+    "main.508fa7ac.js.map": "/personal-transactions/static/js/main.508fa7ac.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2c08da48.css",
+    "static/js/main.508fa7ac.js"
+  ]
+}
